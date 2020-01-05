@@ -1,13 +1,14 @@
 // Testing connection
 console.log("scripts loaded");
 
-
 // Global Variables
 let highScore = 0;
 let timeLeft = 10;
 
 let score = document.getElementById("score");
 let time = document.getElementById("time");
+
+let numQuestions = questions.length;
 
 // Let's connect our button
 let btn = document.getElementById("start");
@@ -39,6 +40,7 @@ function startGame() {
 
     // Call Timer function
     timer();
+    loadQuestion();
 }
 
 
@@ -72,6 +74,39 @@ function timer() {
         }
     }, 1000);
 
+}
+
+
+// Load Question
+function loadQuestion() {
+
+    // Clear current question and update span
+    let askQuestion = document.getElementById("ask");
+    askQuestion.textContent = questions[0].title;
+
+    let choices = document.getElementById("choices");
+    // Render a new li for each question choice
+    for(let i = 0; i < questions[0].choices.length; i++) {
+        console.log(i)
+        // Create li element for each answer choice
+        let ansChoice = document.createElement("li");
+        // Add 'id' attribute to each choice 
+        ansChoice.setAttribute("id", i);
+        // Add 'data' attribute to each choice
+        ansChoice.setAttribute("data", `data-choice-${i}`);
+        ansChoice.setAttribute("value", `value-choice-${i}`);
+        // Add event listener
+        ansChoice.addEventListener("click", function(event) {
+            event.stopPropagation();
+            console.log(event.target);
+            console.log(event.target.value);
+        })
+        // Update text of li element
+        ansChoice.textContent = questions[0].choices[i]; 
+
+        // Add answer choice to <ul> DOM
+        choices.appendChild(ansChoice);
+    }
 }
 
 
