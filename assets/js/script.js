@@ -2,8 +2,10 @@
 console.log("scripts loaded");
 
 // Global Variables
+let timeLeft = 60;
 let highScore = 85;
-let timeLeft = 10;
+let highScoreArray = [];
+let gameScore;
 
 let score = document.getElementById("score");
 let time = document.getElementById("time");
@@ -17,6 +19,7 @@ let timerInterval;
 // Create a variable to hold our users answers
 let userAnswers = [];
 
+
 // Let's connect our button
 let btn = document.getElementById("start");
 btn.addEventListener("click", startGame);
@@ -25,6 +28,7 @@ btn.addEventListener("click", startGame);
 let questionDiv = document.getElementById("question");
 let askQuestion = document.getElementById("ask");
 let choices = document.getElementById("choices");
+
 
 
 function initialize() {
@@ -209,14 +213,72 @@ function clear() {
 
 
 function endGame() {
+    scoreGame();
     // Clear timer
     clearInterval(timerInterval);
     clear();
-
+    
     askQuestion.textContent = "GAME OVER";
     time.textContent = "- - - -";
-    return console.log("Game OVER!!");
+    console.log("Game OVER!!");
+    
+    // showLeader();
+    saveUser();
 }
+
+function scoreGame() {
+    gameScore = timeLeft;
+    console.log(`Game Score: ${gameScore}`);;
+    return;
+}
+
+function showLeader() {
+    let showLeader = document.getElementById("scoreboard");
+    showLeader.classList.remove("hide");
+
+    if(highScoreArray !== 0) {
+        let highScoreBoard = document.getElementById("highscores");
+        
+        // loop through High Score Array
+        for(let i = 0; i < highScoreArray.length; i++) {
+            let newScore = document.createElement("li");
+            newScore.textContent = highScoreArray[i].username + " : " + highScoreArray[i].score;
+            highScoreBoard.appendChild(newScore);
+        }
+    }
+}
+
+function saveUser() {
+    let userForm = document.getElementById("user-form");
+    userForm.classList.remove("hide");
+    // reset user score
+
+    let userScore = document.getElementById("userScore");
+    userScore.innerHTML = gameScore;
+
+    let userSubmit = document.getElementById("userSubmit");
+    let userInitials = document.getElementById("userInitials");
+
+    userSubmit.addEventListener("click", function(event) {
+        event.preventDefault();
+
+        console.log(userInitials.value);
+        highScoreArray.push( 
+            {   
+                username: userInitials.value, 
+                score: gameScore 
+            } 
+        ); 
+
+        // Clear Input
+        userInitials.innerHTML = '';
+
+        // Show Leader Board
+        showLeader();
+    });
+    
+}
+
 
 // Initalize Variables on Browser Load
 initialize();

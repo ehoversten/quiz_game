@@ -41,6 +41,30 @@
                 </ul>
             </div>
         </div>
+
+        <div id="user-form" class="container hide">
+            <div id="form-container">
+                <h1>Your Score: <span id="userScore"></span></h1>
+                <br>
+
+                <form class="form-inline">
+                    <div class="form-group mb-2">
+                        <label for="userInitials" class="sr-only">Enter Users Initals</label>
+                        <input type="text" class="form-control" id="userInitials" aria-describedby="userHelp">
+                    </div>
+                    <button type="submit" id="userSubmit" class="btn btn-primary mb-2 ml-3">Submit</button>
+                </form>
+                <small id="userHelp" class="form-text text-muted">Enter your Initials to be added to the leaderboard!</small>
+            </div>
+        </div>
+
+        <div id="scoreboard" class="container hide">
+            <h1>Leader Board:</h1>
+            <hr>
+            <ul id="highscores">
+
+            </ul>
+        </div>
     </main>
 
     <!-- <footer>
