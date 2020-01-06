@@ -52,6 +52,7 @@ function startGame() {
 //    displayQuestion.textContent = "Button Clicked!";
     // Add question to the DOM
 //    questionDiv.appendChild(displayQuestion);
+    btn.classList.add("hide");
 
     check();
 }
@@ -75,7 +76,7 @@ function timer() {
         // Make sure that we clear the timer when timer reaches zero
         if (timeLeft === 0 || gameEnd === true) {
             // Clear the timer
-            clearInterval(timerInterval);
+            // clearInterval(timerInterval);
             console.log("Time UP!");
             // gameEnd = true;
 
