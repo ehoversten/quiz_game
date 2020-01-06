@@ -10,6 +10,9 @@ let time = document.getElementById("time");
 
 let numQuestions = questions.length;
 let currentQuestion;
+let gameEnd = true;
+
+let timerInterval;
 
 // Create a variable to hold our users answers
 let userAnswers = [];
@@ -29,14 +32,14 @@ function initialize() {
 
     // initalize question set
     currentQuestion = 0;
-
+    userAnswers = [];
     score.textContent = highScore;
 }
 
 // Start Game Function
 function startGame() {
     console.log("Starting Game");
-
+    gameEnd = false;
     // Initialize Timer
 
     // Call Timer function
@@ -60,7 +63,7 @@ function timer() {
     console.log("Timer Started ...");
 
     // Let's Create a new timer
-    var timerInterval = setInterval(function () {
+    timerInterval = setInterval(function () {
         // ** TESTING ** 
         // console.log(timeLeft);
 
@@ -70,10 +73,12 @@ function timer() {
         time.textContent = timeLeft;
 
         // Make sure that we clear the timer when timer reaches zero
-        if (timeLeft === 0) {
+        if (timeLeft === 0 || gameEnd === true) {
             // Clear the timer
             clearInterval(timerInterval);
             console.log("Time UP!");
+            // gameEnd = true;
+
             // Create a new element to hold the time left
             let timeDisplay = document.createElement("p");
             // Add text to our element
@@ -203,9 +208,12 @@ function clear() {
 
 
 function endGame() {
+    // Clear timer
+    clearInterval(timerInterval);
     clear();
 
     askQuestion.textContent = "GAME OVER";
+    time.textContent = "- - - -";
     return console.log("Game OVER!!");
 }
 
