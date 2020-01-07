@@ -4,7 +4,20 @@ console.log("scripts loaded");
 // Global Variables
 let timeLeft = 60;
 let highScore = 85;
-let highScoreArray = [];
+let highScoreArray = [
+    {
+        username: "Bobby",
+        score: 96
+    },
+    {
+        username: "Manhattan",
+        score: 90
+    },
+    {
+        username: "Kire",
+        score: 89
+    } 
+];
 let gameScore;
 
 let score = document.getElementById("score");
@@ -29,7 +42,8 @@ let questionDiv = document.getElementById("question");
 let askQuestion = document.getElementById("ask");
 let choices = document.getElementById("choices");
 
-
+let userForm = document.getElementById("user-form");
+let scoreBoard = document.getElementById("scoreboard");
 
 function initialize() {
     console.log("Setting up");
@@ -37,7 +51,12 @@ function initialize() {
     // initalize question set
     currentQuestion = 0;
     userAnswers = [];
-    score.textContent = highScore;
+
+    let topScore = localStorage.getItem("userScore")
+    // score.textContent = topScore[0].score;
+    let parseScore = JSON.parse(topScore);
+    console.log(parseScore);
+    score.textContent = parseScore.score;
 }
 
 // Start Game Function
@@ -233,8 +252,11 @@ function scoreGame() {
 }
 
 function showLeader() {
-    let showLeader = document.getElementById("scoreboard");
-    showLeader.classList.remove("hide");
+    // Hide user-form div
+    userForm.classList.add("hide");
+
+    // let showLeader = document.getElementById("scoreboard");
+    scoreBoard.classList.remove("hide");
 
     if(highScoreArray !== 0) {
         let highScoreBoard = document.getElementById("highscores");
@@ -249,7 +271,7 @@ function showLeader() {
 }
 
 function saveUser() {
-    let userForm = document.getElementById("user-form");
+    // let userForm = document.getElementById("user-form");
     userForm.classList.remove("hide");
     // reset user score
 
@@ -269,6 +291,15 @@ function saveUser() {
                 score: gameScore 
             } 
         ); 
+
+        // Create a new object to hold the new score and name
+        let highUserScore = {
+            username: userInitials.value,
+            score: gameScore
+        } 
+        // set new submission
+        localStorage.setItem("userScore", JSON.stringify(highUserScore));
+
 
         // Clear Input
         userInitials.innerHTML = '';
