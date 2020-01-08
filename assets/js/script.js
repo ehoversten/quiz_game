@@ -1,9 +1,29 @@
 // Testing connection
 console.log("scripts loaded");
 
-// Global Variables
-let timeLeft = 60;
+//  Declare Global Variables
+// Define amount of game time (in seconds)
+let count = 60;
+
+// How many questions do we have?
+let numQuestions = questions.length;
+
+// Create a variable to keep track of what question we are on
+let currentQuestion;
+
+// Create a variable to hold the STATE of the game
+let gameEnd = true;
+let gameScore;
+
+// Declare our timer variable globally and we can clear it anywhere in our code later (not just when the timer ends, say when the game ends)
+let timerInterval;
+
+// Create a GLOBAL variable to hold our users answers
+let userAnswers = [];
+
+// ** TEMP TESTING CODE ** //
 let highScore = 85;
+
 let highScoreArray = [
     {
         username: "Bobby",
@@ -18,21 +38,11 @@ let highScoreArray = [
         score: 89
     } 
 ];
-let gameScore;
+// ** TEMP TESTING CODE ** //
 
+// Grab HTML elements for later DOM manipulation
 let score = document.getElementById("score");
 let time = document.getElementById("time");
-
-let numQuestions = questions.length;
-let currentQuestion;
-let gameEnd = true;
-
-// Declare our timer variable globally and we can clear it anywhere in our code later (not just when the timer ends, say when the game ends)
-let timerInterval;
-
-// Create a variable to hold our users answers
-let userAnswers = [];
-
 
 // Let's connect our button
 let btn = document.getElementById("start");
@@ -46,29 +56,40 @@ let choices = document.getElementById("choices");
 let userForm = document.getElementById("user-form");
 let scoreBoard = document.getElementById("scoreboard");
 
+
+// Initalization Function: Purpose of function is to setup landing page variables such as 
 function initialize() {
     console.log("Setting up");
 
-    // initalize question set
-    currentQuestion = 0;
-    userAnswers = [];
-
+    // Pull out scores from the localStorage OBJECT
     let topScore = localStorage.getItem("userScore")
-    // score.textContent = topScore[0].score;
+
+    // Parse the string JSON object into a JavaScript Object
     let parseScore = JSON.parse(topScore);
     console.log(parseScore);
+
+    // Update high score in DOM
     score.textContent = parseScore.score;
 }
 
+// ---------------------------------------------------- //
+//
 // Start Game Function
+//
+// ---------------------------------------------------- //
 function startGame() {
     console.log("Starting Game");
+    // Set gameEnd variable to FALSE and start game
     gameEnd = false;
-    // Initialize Timer
+    
+    // Initalize question set 
+    currentQuestion = 0;
+    // Reset answer array for new game
+    userAnswers = [];
 
-    // Call Timer function
+    // Initialize Timer
     timer();
-    time.textContent = timeLeft;
+    time.textContent = count;
 
     // Hide start button
     btn.classList.add("hide");
@@ -78,35 +99,44 @@ function startGame() {
 }
 
 
+// ---------------------------------------------------- //
+//
+// Timer Function:
+//
+// ---------------------------------------------------- //
 
-// Timer Function
 function timer() {
     console.log("Timer Started ...");
 
-    // Let's Create a new timer
+    // Create a new timer
     timerInterval = setInterval(function () {
+        // Decrement timer variable
+        count--;
 
-        // Decrement time
-        timeLeft--;
         // Update the DOM with the time
-        time.textContent = timeLeft;
+        time.textContent = count;
 
-        // Make sure that we clear the timer when timer reaches zero
-        if (timeLeft === 0 || gameEnd === true) {
+        // Test - Time ran out 
+        if (count === 0 || gameEnd === true) {
             // Create a new element to hold the time left
             let timeDisplay = document.createElement("p");
             // Add text to our element
-            time.textContent = timeLeft;
             timeDisplay.textContent = "Times Up!";
-            // Add question to the DOM
+            // Add Element to the DOM
             questionDiv.appendChild(timeDisplay);
             // Run endGame function
             endGame();
         }
+
     }, 1000);  // Run every 1000 ms (or 1 second)
 
 }
 
+// ---------------------------------------------------- //
+//
+// Check Function:
+//
+// ---------------------------------------------------- //
 function check() {
     // TEST HOW MANY QUESTIONS LEFT
     if (currentQuestion === numQuestions) {
@@ -117,6 +147,11 @@ function check() {
     }
 } 
 
+// ---------------------------------------------------- //
+//
+// Log User Selection Function:
+//
+// ---------------------------------------------------- //
 function next(event) {
     // event.stopPropagation();
 
@@ -133,8 +168,11 @@ function next(event) {
     check();
 }
 
-
-// Load Question
+// ---------------------------------------------------- //
+//
+// Load Question Function:
+//
+// ---------------------------------------------------- //
 function loadQuestion() {
     // ** TESTING ** //
     console.log(`Current Question is ${1 + currentQuestion}`);
@@ -166,6 +204,11 @@ function loadQuestion() {
 
 }
 
+// ---------------------------------------------------- //
+//
+// Clear Question Function:
+//
+// ---------------------------------------------------- //
 function clear() {
     // ** THIS WILL NOT WORK THE WAY WE THINK ** //
     // questionDiv.removeChild(askQuestion);
@@ -185,7 +228,11 @@ function clear() {
     return;
 }
 
-
+// ---------------------------------------------------- //
+//
+// End Game Function:
+//
+// ---------------------------------------------------- //
 function endGame() {
     scoreGame();
     // Clear timer
@@ -200,12 +247,22 @@ function endGame() {
     saveUser();
 }
 
+// ---------------------------------------------------- //
+//
+// Score Game Function:
+//
+// ---------------------------------------------------- //
 function scoreGame() {
     gameScore = timeLeft;
     console.log(`Game Score: ${gameScore}`);;
     return;
 }
 
+// ---------------------------------------------------- //
+//
+// Leader Board Function:
+//
+// ---------------------------------------------------- //
 function showLeader() {
     // Hide user-form div
     userForm.classList.add("hide");
@@ -225,6 +282,11 @@ function showLeader() {
     }
 }
 
+// ---------------------------------------------------- //
+//
+// Save User/Score Function:
+//
+// ---------------------------------------------------- //
 function saveUser() {
     // let userForm = document.getElementById("user-form");
     userForm.classList.remove("hide");
