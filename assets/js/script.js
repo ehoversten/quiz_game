@@ -27,6 +27,7 @@ let numQuestions = questions.length;
 let currentQuestion;
 let gameEnd = true;
 
+// Declare our timer variable globally and we can clear it anywhere in our code later (not just when the timer ends, say when the game ends)
 let timerInterval;
 
 // Create a variable to hold our users answers
@@ -68,15 +69,11 @@ function startGame() {
     // Call Timer function
     timer();
     time.textContent = timeLeft;
-    // ** TESTING ** //
-    // Create a new element to hold our question
- //   let displayQuestion = document.createElement("h1");
-    // Add text to our element
-//    displayQuestion.textContent = "Button Clicked!";
-    // Add question to the DOM
-//    questionDiv.appendChild(displayQuestion);
+
+    // Hide start button
     btn.classList.add("hide");
 
+    // Run check function
     check();
 }
 
@@ -88,8 +85,6 @@ function timer() {
 
     // Let's Create a new timer
     timerInterval = setInterval(function () {
-        // ** TESTING ** 
-        // console.log(timeLeft);
 
         // Decrement time
         timeLeft--;
@@ -98,11 +93,6 @@ function timer() {
 
         // Make sure that we clear the timer when timer reaches zero
         if (timeLeft === 0 || gameEnd === true) {
-            // Clear the timer
-            // clearInterval(timerInterval);
-            console.log("Time UP!");
-            // gameEnd = true;
-
             // Create a new element to hold the time left
             let timeDisplay = document.createElement("p");
             // Add text to our element
@@ -110,17 +100,14 @@ function timer() {
             timeDisplay.textContent = "Times Up!";
             // Add question to the DOM
             questionDiv.appendChild(timeDisplay);
+            // Run endGame function
             endGame();
         }
-    }, 1000);
+    }, 1000);  // Run every 1000 ms (or 1 second)
 
 }
 
 function check() {
-    // ** TESTING ** //
-    console.log("Running check");
-    console.log(`Current Question: ${currentQuestion}`);
-    console.log(`Total Questions: ${numQuestions}`);
     // TEST HOW MANY QUESTIONS LEFT
     if (currentQuestion === numQuestions) {
         // Run endGame function
@@ -157,10 +144,10 @@ function loadQuestion() {
         askQuestion = document.getElementById("ask");
         askQuestion.textContent = questions[currentQuestion].title;
     
+        // Grab the containing element to add dynamically created content
         choices = document.getElementById("choices");
 
-        // Render a new li for each question choice
-
+    //-- Render a new <li> for each question choice --//
         // Create li element for each answer choice
         let ansChoice = document.createElement("li");
         // Add 'id' attribute to each choice 
@@ -176,38 +163,6 @@ function loadQuestion() {
         // Add answer choice to <ul> DOM
         choices.appendChild(ansChoice);
     }
-
-    // for (let i = 0; i < questions.length; i++) {
-    //     // Clear current question and update span
-    //     let askQuestion = document.getElementById("ask");
-    //     askQuestion.textContent = questions[0].title;
-
-    //     let choices = document.getElementById("choices");
-
-    //     // Render a new li for each question choice
-    //     for (let j = 0; j < questions.choices.length; j++) {
-
-    //         // Create li element for each answer choice
-    //         let ansChoice = document.createElement("li");
-    //         // Add 'id' attribute to each choice 
-    //         ansChoice.setAttribute("id", j);
-    //         // Add 'data' attribute to each choice
-    //         ansChoice.setAttribute("data", `data-choice-${j}`);
-    //         ansChoice.setAttribute("value", `value-choice-${j}`);
-    //         // Add event listener
-    //         ansChoice.addEventListener("click", function (event) {
-    //             event.stopPropagation();
-    //             console.log(event.target);
-    //             // console.log(event.target.value);
-    //         })
-    //         // Update text of li element
-    //         ansChoice.textContent = questions[i].choices[j];
-
-    //         // Add answer choice to <ul> DOM
-    //         choices.appendChild(ansChoice);
-
-    //     }
-    // }
 
 }
 
