@@ -57,7 +57,14 @@ let userForm = document.getElementById("user-form");
 let scoreBoard = document.getElementById("scoreboard");
 
 
-// Initalization Function: Purpose of function is to setup landing page variables such as 
+// ---------------------------------------------------- //
+//
+// Initalization Function: Function will look into local
+//    storage, convert JSON objct into JavaScript object,
+//    and sort through object array for highest score.
+//
+// ---------------------------------------------------- //
+
 function initialize() {
     console.log("Setting up");
 
@@ -104,7 +111,6 @@ function startGame() {
 // Timer Function:
 //
 // ---------------------------------------------------- //
-
 function timer() {
     console.log("Timer Started ...");
 
@@ -116,7 +122,7 @@ function timer() {
         // Update the DOM with the time
         time.textContent = count;
 
-        // Test - Time ran out 
+        // Test - Time rus out 
         if (count === 0 || gameEnd === true) {
             // Create a new element to hold the time left
             let timeDisplay = document.createElement("p");
@@ -234,52 +240,64 @@ function clear() {
 //
 // ---------------------------------------------------- //
 function endGame() {
-    scoreGame();
-    // Clear timer
+
+    // Clear countdown timer
     clearInterval(timerInterval);
+    // Empty Question and Selection Choice Div
     clear();
     
+    // Display endGame Message 
     askQuestion.textContent = "GAME OVER";
     time.textContent = "- - - -";
     console.log("Game OVER!!");
-    
-    // showLeader();
+
+    // Find out users score 
+    scoreGame();
+    // Send user to form to save username and score
     saveUser();
 }
 
 // ---------------------------------------------------- //
 //
-// Score Game Function:
+// Score Game Function: Function will calculate users score
 //
 // ---------------------------------------------------- //
 function scoreGame() {
-    gameScore = timeLeft;
-    console.log(`Game Score: ${gameScore}`);;
+    // ** Calculate users score ** //
+    gameScore = count;
+    console.log(`Game Score: ${gameScore}`);
+
+    // Return from scoreGame function
     return;
 }
 
 // ---------------------------------------------------- //
 //
-// Leader Board Function:
+// Leader Board Function: Function will pull userScore OBJECT
+//     from local storage and create a leader board div
 //
 // ---------------------------------------------------- //
 function showLeader() {
     // Hide user-form div
     userForm.classList.add("hide");
+    // Hide Question/Game Over Div
+    askQuestion.classList.add("hide");
 
-    // let showLeader = document.getElementById("scoreboard");
+    // Un-hide score board div
     scoreBoard.classList.remove("hide");
 
-    if(highScoreArray !== 0) {
-        let highScoreBoard = document.getElementById("highscores");
-        
-        // loop through High Score Array
-        for(let i = 0; i < highScoreArray.length; i++) {
-            let newScore = document.createElement("li");
-            newScore.textContent = highScoreArray[i].username + " : " + highScoreArray[i].score;
-            highScoreBoard.appendChild(newScore);
-        }
+    let highScoreBoard = document.getElementById("highscores");
+    // TEST if any scores currently exist
+    if(!highScoreArray) {
+        highScoreBoard.textContent = " - "
     }
+    // Display high scores
+    for(let i = 0; i < highScoreArray.length; i++) {
+        let newScore = document.createElement("li");
+        newScore.textContent = highScoreArray[i].username + " : " + highScoreArray[i].score;
+        highScoreBoard.appendChild(newScore);
+    }
+
 }
 
 // ---------------------------------------------------- //
@@ -288,20 +306,24 @@ function showLeader() {
 //
 // ---------------------------------------------------- //
 function saveUser() {
-    // let userForm = document.getElementById("user-form");
+    // Un-Hide User form and score
     userForm.classList.remove("hide");
-    // reset user score
 
+    // Update user score in DOM
     let userScore = document.getElementById("userScore");
     userScore.innerHTML = gameScore;
 
-    let userSubmit = document.getElementById("userSubmit");
+    // Grab form input element 
     let userInitials = document.getElementById("userInitials");
 
+    // Capture Submit Event
+    let userSubmit = document.getElementById("userSubmit");
     userSubmit.addEventListener("click", function(event) {
         event.preventDefault();
 
         console.log(userInitials.value);
+
+        // Add current game score to high score array
         highScoreArray.push( 
             {   
                 username: userInitials.value, 
@@ -314,11 +336,10 @@ function saveUser() {
             username: userInitials.value,
             score: gameScore
         } 
-        // set new submission
+        // Add new submission to Local Storage
         localStorage.setItem("userScore", JSON.stringify(highUserScore));
 
-
-        // Clear Input
+        // Clear form input
         userInitials.innerHTML = '';
 
         // Show Leader Board
