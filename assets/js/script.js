@@ -69,25 +69,6 @@ let scoreBoard = document.getElementById("scoreboard");
 function initialize() {
     console.log("Setting up");
 
-    // ** Given Data Set ** /
-    // let dataSetScores = [
-    //     {
-    //         username: "Bobby",
-    //         score: 45
-    //     },
-    //     {
-    //         username: "Manhattan",
-    //         score: 42
-    //     },
-    //     {
-    //         username: "Kire",
-    //         score: 40
-    //     }
-    // ];
-
-    // localStorage.setItem("userScores", JSON.stringify(highScoreArray));
-    // ** TEMP TESTING CODE ABOVE ** //
-
     // Pull out scores from the localStorage OBJECT
     let findTopScore = localStorage.getItem("userScores");
 
@@ -141,12 +122,17 @@ function startGame() {
     // Update the timer on the DOM
     time.textContent = count;
 
+    // ** REMOVE ** //
+    // let timeupDisplay = document.getElementById("timeup");
+    // timeupDisplay.remove();
+    // ** REMOVE ** //
+
     // Hide start button
     btn.classList.add("hide");
     // Hide Leader Board
     scoreBoard.classList.add("hide");
+    // Un-hide Question Div (if playing consecutive times)
     ask.classList.remove("hide");
-
 
     // Run check function
     check();
@@ -170,14 +156,7 @@ function timer() {
         time.textContent = count;
 
         // Test - Time rus out 
-        if (count === 0 || gameEnd === true) {
-            // Create a new element to hold the time left
-            let timeDisplay = document.createElement("p");
-            timeDisplay.setAttribute("id", "timeup");
-            // Add text to our element
-            timeDisplay.textContent = "Times Up!";
-            // Add Element to the DOM
-            questionDiv.appendChild(timeDisplay);
+        if (count === 0 ) {
             // Run endGame function
             endGame();
         }
