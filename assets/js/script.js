@@ -46,9 +46,12 @@ let score = document.getElementById("score");
 let username = document.getElementById("username");
 let time = document.getElementById("time");
 
-// Let's connect our button
+// Let's connect our buttons
 let btn = document.getElementById("start");
 btn.addEventListener("click", startGame);
+
+let clearBoard = document.getElementById("empty_scores");
+clearBoard.addEventListener("click", clearLeaderBoard);
 
 // Let's connect to our question div
 let questionDiv = document.getElementById("question");
@@ -392,7 +395,26 @@ function showLeader() {
         newScore.textContent = parsedScoreBoard[i].username + " : " + parsedScoreBoard[i].score;
         scoreBoardText.appendChild(newScore);
     }
-
 }
 
+// ---------------------------------------------------- //
+//
+// Clear Leader Board Function: Function will clear userScore OBJECT
+//     from local storage
+//
+// ---------------------------------------------------- //
+
+function clearLeaderBoard() {
+
+    // Clear what is in localStorage
+    localStorage.clear();
+    console.log("Scores Cleared");
+    console.log(localStorage);
+
+
+    // // Pull out the userScores JSON OBJECT from localStorage
+    // let clearData = localStorage.getItem("userScores");
+    // let parsedClearData = JSON.parse
+
+}
 
