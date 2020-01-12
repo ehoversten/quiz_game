@@ -11,6 +11,13 @@
             "name": "Debug in Chrome",
             "file": "${workspaceFolder}/index.html"
         },
+        {
+            "name": "Launch localhost",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost/",
+            "webRoot": "${workspaceFolder}"
+        }
 
     ]
 }

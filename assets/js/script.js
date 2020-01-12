@@ -41,7 +41,7 @@ clearBoard.addEventListener("click", clearLeaderBoard);
 let showLeaderButton = document.getElementById("showLeader");
 showLeaderButton.addEventListener("click", showLeader);
 
-let playAgain = document.getElementById("playAgain");
+let playAgain = document.querySelector(".playAgain");
 playAgain.addEventListener("click", startGame);
 
 // Let's connect to our question div
@@ -63,6 +63,9 @@ let scoreBoardText = document.getElementById("highscores");
 // ---------------------------------------------------- //
 function initialize() {
     console.log("Setting up");
+
+    // hide Score Board if not currently hidden
+    scoreBoard.classList.add("hide");
 
     // IF there is nothing stored currently in local storage add some filler data
     if(localStorage.length === 0) {
@@ -297,7 +300,7 @@ function endGame() {
     clearInterval(timerInterval);
 
     // Empty Question and Selection Choice Div
-    clear();
+    // clear();
     
     // Display endGame Message 
     askQuestion.textContent = "GAME OVER";
@@ -351,6 +354,10 @@ function saveUser() {
         //debugger;
         event.preventDefault();
 
+        if(userInitials.value == ''){
+            return;
+        }
+
         console.log(userInitials.value);
 
         let tempArray = localStorage.getItem("userScores");
@@ -384,11 +391,8 @@ function saveUser() {
             localStorage.setItem('userScores', JSON.stringify(highScoreArray));
         }
 
-        // Clear form input
-        userInitials.innerHTML = '';
-
-        // Un-Hide start button
-        btn.classList.remove("hide");
+        // Clear form input field
+        userInitials.value = '';
 
     });
 
@@ -401,12 +405,8 @@ function saveUser() {
 //     from local storage and create a leader board div
 //
 // ---------------------------------------------------- //
-// Display Leader Board
-
-showLeader();
-
 function showLeader() {
-
+    debugger;
     // Hide user-form div
     userForm.classList.add("hide");
     // Hide Question/Game Over Div
@@ -414,6 +414,9 @@ function showLeader() {
 
     // Un-hide score board div
     scoreBoard.classList.remove("hide");
+
+    // Clear the users and scores from <ul id='highscores'>
+    highscores.innerHTML = "";
 
     // ** REMOVE CODE ** //
     // let scoreBoardText = document.getElementById("highscores");
@@ -440,7 +443,6 @@ function showLeader() {
 //     from local storage
 //
 // ---------------------------------------------------- //
-
 function clearLeaderBoard() {
 
     // Clear what is in localStorage
