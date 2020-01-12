@@ -19,27 +19,12 @@ let gameScore;
 
 // Declare our timer variable globally and we can clear it anywhere in our code later (not just when the timer ends, say when the game ends)
 let timerInterval;
+let leaderTimer;
 
 // Create a GLOBAL variable to hold our users answers
 let userAnswers = [];
 
-// Create a variable to PERSIST our high score
-// let highScoreArray = [
-//     {
-//         username: "Bobby",
-//         score: 45
-//     },
-//     {
-//         username: "Manhattan",
-//         score: 42
-//     },
-//     {
-//         username: "Kire",
-//         score: 40
-//     }
-// ];
-
-// localStorage.setItem("userScores", JSON.stringify(highScoreArray));
+let highScoreArray = [];
 
 // Grab HTML elements for later DOM manipulation
 let score = document.getElementById("score");
@@ -53,6 +38,12 @@ btn.addEventListener("click", startGame);
 let clearBoard = document.getElementById("empty_scores");
 clearBoard.addEventListener("click", clearLeaderBoard);
 
+let showLeaderButton = document.getElementById("showLeader");
+showLeaderButton.addEventListener("click", showLeader);
+
+let playAgain = document.getElementById("playAgain");
+playAgain.addEventListener("click", startGame);
+
 // Let's connect to our question div
 let questionDiv = document.getElementById("question");
 let askQuestion = document.getElementById("ask");
@@ -60,6 +51,7 @@ let choices = document.getElementById("choices");
 
 let userForm = document.getElementById("user-form");
 let scoreBoard = document.getElementById("scoreboard");
+let scoreBoardText = document.getElementById("highscores");
 
 
 // ---------------------------------------------------- //
@@ -71,6 +63,27 @@ let scoreBoard = document.getElementById("scoreboard");
 // ---------------------------------------------------- //
 function initialize() {
     console.log("Setting up");
+
+    // IF there is nothing stored currently in local storage add some filler data
+    if(localStorage.length === 0) {
+        // Create a variable to PERSIST our high score
+        highScoreArray = [
+            {
+                username: "Bobby",
+                score: 45
+            },
+            {
+                username: "Manhattan",
+                score: 42
+            },
+            {
+                username: "Kire",
+                score: 40
+            }
+        ];
+
+        localStorage.setItem("userScores", JSON.stringify(highScoreArray));
+    }
 
     // Pull out scores from the localStorage OBJECT
     let findTopScore = localStorage.getItem("userScores");
@@ -109,6 +122,11 @@ initialize();
 // ---------------------------------------------------- //
 function startGame() {
     console.log("Starting Game");
+
+    // TEST to see if localStorage was cleared, IF yes rerun the initalize function
+    if(localStorage === 0) {
+        initialize();
+    }
     // Set gameEnd variable to FALSE and start game
     gameEnd = false;
     
@@ -124,11 +142,6 @@ function startGame() {
     timer();
     // Update the timer on the DOM
     time.textContent = count;
-
-    // ** REMOVE ** //
-    // let timeupDisplay = document.getElementById("timeup");
-    // timeupDisplay.remove();
-    // ** REMOVE ** //
 
     // Hide start button
     btn.classList.add("hide");
@@ -319,7 +332,7 @@ function scoreGame() {
 //
 // ---------------------------------------------------- //
 function saveUser() {
-
+    //debugger;
     // Un-Hide User form and score
     userForm.classList.remove("hide");
 
@@ -335,35 +348,50 @@ function saveUser() {
     // Capture Submit Event
     let userSubmit = document.getElementById("userSubmit");
     userSubmit.addEventListener("click", function(event) {
+        //debugger;
         event.preventDefault();
 
         console.log(userInitials.value);
 
         let tempArray = localStorage.getItem("userScores");
+        // TEST Do we have a JSON object called 'userScores' stored in localStorage?
+        console.log("***********");
         let parsedTempArray = JSON.parse(tempArray);
         console.log(parsedTempArray);
-        
-        // Add current game score to high score array
-        parsedTempArray.push( 
-            {   
-                username: userInitials.value, 
-                score: gameScore 
-            } 
+        console.log(parsedTempArray.length);
+        if (parsedTempArray !== undefined) {
+            // Add current game score to high score array
+            parsedTempArray.push( 
+                {   
+                    username: userInitials.value, 
+                    score: gameScore 
+                } 
             ); 
-            
-        console.log(parsedTempArray);
-
-        // Save updated JavaScript OBJECT to local storage by turning it into a JSON OBJECT
-        localStorage.setItem('userScores', JSON.stringify(parsedTempArray));
+                
+            console.log(parsedTempArray);  // ?????? WHAT ???
+    
+            // Save updated JavaScript OBJECT to local storage by turning it into a JSON OBJECT
+            localStorage.setItem('userScores', JSON.stringify(parsedTempArray));
+        } else {
+            highScoreArray = [];
+            // Add current game score to high score array
+            highScoreArray.push(
+                {
+                    username: userInitials.value,
+                    score: gameScore
+                }
+            ); 
+            localStorage.setItem('userScores', JSON.stringify(highScoreArray));
+        }
 
         // Clear form input
         userInitials.innerHTML = '';
 
-        // Show Leader Board
-        showLeader();
         // Un-Hide start button
         btn.classList.remove("hide");
+
     });
+
 }
 
 
@@ -373,7 +401,12 @@ function saveUser() {
 //     from local storage and create a leader board div
 //
 // ---------------------------------------------------- //
+// Display Leader Board
+
+showLeader();
+
 function showLeader() {
+
     // Hide user-form div
     userForm.classList.add("hide");
     // Hide Question/Game Over Div
@@ -382,7 +415,11 @@ function showLeader() {
     // Un-hide score board div
     scoreBoard.classList.remove("hide");
 
-    let scoreBoardText = document.getElementById("highscores");
+    // ** REMOVE CODE ** //
+    // let scoreBoardText = document.getElementById("highscores");
+    // ** REMOVE CODE ** //
+
+
     console.log("parseing local storage object")
     let highScoreBoard = localStorage.getItem('userScores');
     let parsedScoreBoard = JSON.parse(highScoreBoard);
@@ -407,14 +444,13 @@ function showLeader() {
 function clearLeaderBoard() {
 
     // Clear what is in localStorage
-    localStorage.clear();
+    localStorage.removeItem("userScores");
+
+    // TEST to make sure it cleared
     console.log("Scores Cleared");
     console.log(localStorage);
-
-
-    // // Pull out the userScores JSON OBJECT from localStorage
-    // let clearData = localStorage.getItem("userScores");
-    // let parsedClearData = JSON.parse
-
+    // Clear the <ul> DOM element
+    scoreBoardText.innerHTML = "";
+    
 }
 
