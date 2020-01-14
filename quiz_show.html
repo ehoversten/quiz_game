@@ -8,82 +8,99 @@
     <title>JavaScript Quiz Game</title>
 </head>
 <body>
-    <section class="navigation container">
-        <div class="nav-item">
-            <a class="leader-link" href="./high_score.html">
-                <h1 class="leaderText">Leader Board</h1>
-            </a>
-        </div>
-        <div class="nav-item title-block">
-            <h1 id="navTitle">Quiz Game</h1>
-        </div>
-        <div class="nav-item">
-            <h2>Time: <span id="timer">- - -</span></h2>
-        </div>
-    </section>
+    <div class="wrapper">
 
-    <section class="main">
-        <div class="welcome-container">
-            <p class="instruction-text">
-                This is a small HTML, CSS and JavaScript quiz game program. You will be presented with a series of questions and multiple choice answers to select from. Answer the questions as best you can. Your score will be calculated at the end of the game or when the timer runs out. When the game ends you can add your name and score to the leader board. This is a timed test, can you beat the high score?
-            </p>
-            <br>
-            <p>Click on the 'Play Game' button to start</p>
-
-            <div class="start-button">
-                <button id="start"><h2>Play Game</h2></button>
+        <!-- NAVIGATION / NAVBAR  -->
+        <section class="navigation container">
+            <div class="nav-item">
+                <a class="leader-link" href="./high_score.html">
+                    <h1 class="leaderText">Leader Board</h1>
+                </a>
             </div>
-        </div>
+            <div class="nav-item title-block">
+                <h1 id="navTitle">Quiz Game</h1>
+            </div>
+            <div class="nav-item">
+                <h2>Time: <span id="timer">- -</span></h2>
+            </div>
+        </section>
+    
+        <section class="main">
 
-        <div class="questions-container">
-            <h1 id="question-title"><span id="Q">Q:</span> Temp Question</h1>
-            <ul id="question-choices">
-                <li id="A" class="ans-choice"><span id="choice-A" class="choice-lbl">A.</span> Choice 1</li>
-                <li id="B" class="ans-choice"><span id="choice-B" class="choice-lbl">B.</span> Choice 2</li>
-                <li id="C" class="ans-choice"><span id="choice-C" class="choice-lbl">C.</span> Choice 3</li>
-                <li id="D" class="ans-choice"><span id="choice-D" class="choice-lbl">D.</span> Choice 3</li>
-            </ul>
-        </div>
+            <!-- WELCOME GAME CONTAINER  -->
+            <div class="welcome-container">
+                <p class="instruction-text">Welcome to my small Quiz Game built using HTML, CSS and vanilla JavaScript.</p>
 
-        <div class="form-container">
-            <h1>Your Score: <span id="user-score">0</span></h1>
-            <form>
-                <label for="username">Enter Name:</label>
-                <input id="username" type="text">
-                <button id="submit" type="submit"><h2>Submit</h2></button>
-            </form>
-        </div>
-    </section>
+                <p>You will be presented with a series of questions and multiple choice answers to select from. Answer the questions as best you can. Your score will be calculated at the end of the game or when the timer runs out. When the game ends you can add your name and score to the leader board. This is a timed test, can you beat the high score?</p>
 
-    <div class="modal-container">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="close">
-                    &times;
+                <br>
+                
+                <p>Click on the 'Play Game' button to start</p>
+    
+                <div class="start-button">
+                    <button id="start"><h2>Play Game</h2></button>
                 </div>
-                <h1 class="modal-header-title"><span class="accent">Leader</span> Board</h1>
             </div>
-            <div class="modal-body">
-                <ul class="user-scores">
-                    <li class="score-item">User #1 - <span class="scores">0</span></li>
-                    <li class="score-item">User #2 - <span class="scores">0</span></li>
-                    <li class="score-item">User #3 - <span class="scores">0</span></li>
-                    <li class="score-item">User #4 - <span class="scores">0</span></li>
-                    <li class="score-item">User #5 - <span class="scores">0</span></li>
+            
+            <!-- QUESTIONS CONTAINER  -->
+            <div class="questions-container">
+                <h1 id="question-title"><span id="Q">Q:</span> Temp Question</h1>
+                <ul id="question-choices">
+                    <li id="A" class="ans-choice"><span id="choice-A" class="choice-lbl">A.</span> Choice 1</li>
+                    <li id="B" class="ans-choice"><span id="choice-B" class="choice-lbl">B.</span> Choice 2</li>
+                    <li id="C" class="ans-choice"><span id="choice-C" class="choice-lbl">C.</span> Choice 3</li>
+                    <li id="D" class="ans-choice"><span id="choice-D" class="choice-lbl">D.</span> Choice 3</li>
                 </ul>
             </div>
-            <div class="modal-footer">
-                <h2 class="modal-footer-msg">Can you beat the high score?</h2>
+            
+            <!-- USER SCORE AND FORM CONTAINER -->
+            <div class="form-container">
+                <h1>Your Score: <span id="user-score">0</span></h1>
+                <form>
+                    <label for="username">Enter Name:</label>
+                    <input id="username" type="text">
+                    <button id="submit" type="submit">Submit</button>
+                </form>
+            </div>
+
+        <!-- END OF MAIN SECTION      -->
+        </section>
+    
+        <!-- HIGH SCORE MODAL  -->
+        <div class="modal-container hide">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="close">
+                        &times;
+                    </div>
+                    <h1 class="modal-header-title"><span class="accent">Leader</span> Board</h1>
+                </div>
+                <div class="modal-body">
+                    <ul class="user-scores">
+                        <li class="score-item">User #1 - <span class="scores">0</span></li>
+                        <li class="score-item">User #2 - <span class="scores">0</span></li>
+                        <li class="score-item">User #3 - <span class="scores">0</span></li>
+                        <li class="score-item">User #4 - <span class="scores">0</span></li>
+                        <li class="score-item">User #5 - <span class="scores">0</span></li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <h2 class="modal-footer-msg">Can you beat the high score?</h2>
+                </div>
             </div>
         </div>
+    
+        <!-- FOOTER SECTION -->
+        <section class="footer">
+            <div class="footer-container">
+                <h3>&copy;2020</h3>
+            </div>
+        </section>
+
+    <!-- END OF WRAPPER DIV -->
     </div>
 
-
-    <section class="footer">
-        <div class="footer-container">
-            <h3>&copy;2020</h3>
-        </div>
-    </section>
-
+    <script src="./assets/js/questions.js"></script>
+    <script src="./assets/js/logic.js"></script>
 </body>
 </html>
