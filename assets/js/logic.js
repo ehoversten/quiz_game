@@ -35,6 +35,7 @@ let welcomeDiv = document.querySelector(".welcome-container");
 let questionDiv = document.querySelector(".questions-container");
 let formDiv = document.querySelector(".form-container");
 let highScoreModal = document.querySelector(".modal-container");
+let leaderboard = document.querySelector(".user-scores");
 
 let qTitle = document.getElementById("question-title");
 let qChoices = document.getElementById("question-choices");
@@ -319,3 +320,33 @@ function saveUser() {
     userInitials.value = '';
 }
 
+// ---------------------------------------------------- //
+//
+// Leader Board Function: Function will pull userScore OBJECT
+//     from local storage and create a leader board div
+//
+// ---------------------------------------------------- //
+function showLeader() {
+    debugger;
+    // Hide All Container Divs
+    formDiv.classList.add("hide");
+    questionDiv.classList.add("hide");
+    welcomeDiv.classList.add("hide");
+
+    // Un-hide leader board modal container
+    highScoreModal.classList.remove("hide");
+
+    // Clear the users and scores from <ul id='highscores'>
+    leaderboard.innerHTML = "";
+
+    let highScoreBoard = localStorage.getItem('userScores');
+    let parsedScoreBoard = JSON.parse(highScoreBoard);
+
+    // Display high scores
+    for (let i = 0; i < parsedScoreBoard.length; i++) {
+        let newScore = document.createElement("li");
+        newScore.textContent = parsedScoreBoard[i].username + " : " + parsedScoreBoard[i].score;
+        newScore.classList.add("score-item");
+        leaderboard.appendChild(newScore);
+    }
+}
