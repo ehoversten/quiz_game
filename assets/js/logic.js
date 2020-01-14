@@ -25,6 +25,7 @@ let highScoreArray = [];
 
 // Grab HTML elements for later DOM manipulation
 let time = document.getElementById("timer");
+let score = document.getElementById("user-score");
 
 let startBtn = document.getElementById("start");
 startBtn.addEventListener("click", newGame);
@@ -34,6 +35,11 @@ let welcomeDiv = document.querySelector(".welcome-container");
 let questionDiv = document.querySelector(".questions-container");
 let formDiv = document.querySelector(".form-container");
 let highScoreModal = document.querySelector(".modal-container");
+
+let qTitle = document.getElementById("question-title");
+let qChoices = document.getElementById("question-choices");
+
+
 
 // ---------------------------------------------------- //
 //
@@ -104,9 +110,13 @@ initialize();
 function newGame() {
     // Set gameEnd variable to FALSE and start game
     gameStop = false;
+    // Reset score
+    gameScore = 0;
 
     // Initalize question set 
     currentQuestion = 0;
+
+    // ** REMOVE ??? ** //
     // Reset answer array for new game
     userAnswers = [];
 
@@ -124,7 +134,7 @@ function newGame() {
     questionDiv.classList.remove("hide");
 
     // Run check function
-    // check();
+    check();
 }
 
 // ---------------------------------------------------- //
@@ -144,9 +154,89 @@ function timer() {
         // Test - Time rus out 
         if (count === 0) {
             // Run gameOver function
-            // endGame();
+            gameOver();
         }
     }, 1000)  // Run every 1000 ms (or 1 second)
+}
+
+
+// ---------------------------------------------------- //
+//
+// Check Function: Tests if we have run out of quesitons
+//
+// ---------------------------------------------------- //
+function check() {
+    // TEST HOW MANY QUESTIONS LEFT
+    if (currentQuestion === numQuestions) {
+        // Run gameOver function
+        gameOver();
+    } else {
+        loadQuestion();
+    }
+} 
+
+
+// ---------------------------------------------------- //
+//
+// Load Question Function:
+//
+// ---------------------------------------------------- //
+function loadQuestion() {
+    debugger;
+    // Clear question title
+    qTitle.textContent = '';
+    qChoices.textContent = '';
+
+    for (let i = 0; i < questions[currentQuestion].choices.length; i++) {
+        qTitle.textContent = questions[currentQuestion].title;
+
+        //-- Render a new <li> for each question choice --//
+        // Create li element for each answer choice
+        let ansChoice = document.createElement("li");
+        // Add 'id' attribute to each choice 
+        ansChoice.setAttribute("id", i);
+        // Add 'data' attribute to each choice
+        ansChoice.setAttribute("data-name", `data-choice-${i}`);
+        ansChoice.setAttribute("value", questions[currentQuestion].choices[i]);
+        // Add our class containing the CSS styling 
+        ansChoice.classList.add("ans-choice");
+
+
+        // Add event listener
+        ansChoice.addEventListener("click", next)
+        // Update text of li element
+        ansChoice.textContent = questions[currentQuestion].choices[i];
+
+        // Add answer choice to <ul> DOM
+        qChoices.appendChild(ansChoice);
+    }
+
+}
+
+// ---------------------------------------------------- //
+//
+// Log User Selection Function:
+//
+// ---------------------------------------------------- //
+function next(event) {
+    debugger;
+    // Uncomment the lines below and inspect the console output if your struggling with events
+    // console.log(event);
+    // console.log(event.target);
+    console.log(event.target.id);
+
+    console.log(event.target.innerText);
+    userAnswers.push(event.target.innerText);
+
+    if(event.target.innerText === questions[currentQuestion].answer) {
+        gameScore += 10;
+    }
+
+    // Increment currentQuestion
+    currentQuestion++;
+
+    // Run check
+    check();
 }
 
 
@@ -158,25 +248,27 @@ function timer() {
 //
 // ---------------------------------------------------- //
 function gameOver() {
-
+    console.log("Game OVER!!");
+    debugger;
     // Set gameStop variable to TRUE
     gameStop = true;
 
     // Clear countdown timer
     clearInterval(timerInterval);
+    time.textContent = "- -";
 
-    // Empty Question and Selection Choice Div
-    // clear();
+    // Add any time left to game score
+    gameScore += count;
 
-    // *** Display endGame Message *** //
+    // Hide question container
+    questionDiv.classList.add("hide");
 
-    // askQuestion.textContent = "GAME OVER";
-    time.textContent = "- - - -";
-    console.log("Game OVER!!");
+    // Display Game Score
+    score.textContent = gameScore;
+    // Un-hide form container
+    formDiv.classList.remove("hide");
 
-    // Find out users score 
-    // scoreGame();
     // Send user to form to save username and score
     // saveUser();
-
 }
+
