@@ -39,6 +39,12 @@ let highScoreModal = document.querySelector(".modal-container");
 let qTitle = document.getElementById("question-title");
 let qChoices = document.getElementById("question-choices");
 
+// Grab form input element 
+let username = document.getElementById("username");
+
+// Capture Submit Event
+let userSubmit = document.getElementById("userSubmit");
+userSubmit.addEventListener("click", saveUser);
 
 
 // ---------------------------------------------------- //
@@ -56,15 +62,15 @@ function initialize() {
         highScoreArray = [
             {
                 username: "Bobby",
-                score: 45
+                score: 90
             },
             {
                 username: "Manhattan",
-                score: 42
+                score: 85
             },
             {
                 username: "Kire",
-                score: 40
+                score: 83
             }
         ];
 
@@ -223,10 +229,8 @@ function next(event) {
     // Uncomment the lines below and inspect the console output if your struggling with events
     // console.log(event);
     // console.log(event.target);
-    console.log(event.target.id);
-
-    console.log(event.target.innerText);
-    userAnswers.push(event.target.innerText);
+    // console.log(event.target.id);
+    // console.log(event.target.innerText);
 
     if(event.target.innerText === questions[currentQuestion].answer) {
         gameScore += 10;
@@ -267,8 +271,51 @@ function gameOver() {
     score.textContent = gameScore;
     // Un-hide form container
     formDiv.classList.remove("hide");
+    // Clear form input field
+    username.value = '';
+}
 
-    // Send user to form to save username and score
-    // saveUser();
+
+// ---------------------------------------------------- //
+//
+// Save User/Score Function: 
+//
+// ---------------------------------------------------- //
+function saveUser() {
+    debugger;
+    // Prevent the form from reloading the page
+    event.preventDefault();
+    // Check that the input is NOT empty
+    if (username.value == '') {
+        return;
+    }
+
+    let tempArray = localStorage.getItem("userScores");
+    // TEST Do we have a JSON object called 'userScores' stored in localStorage?
+    let parsedTempArray = JSON.parse(tempArray);
+
+    if (parsedTempArray !== undefined) {
+        // Add current game score to high score array
+        parsedTempArray.push(
+            {
+                username: username.value,
+                score: gameScore
+            }
+        );
+        // Save updated JavaScript OBJECT to local storage by turning it into a JSON OBJECT
+        localStorage.setItem('userScores', JSON.stringify(parsedTempArray));
+    } else {
+        highScoreArray = [];
+        // Add current game score to high score array
+        highScoreArray.push(
+            {
+                username: username.value,
+                score: gameScore
+            }
+        );
+        localStorage.setItem('userScores', JSON.stringify(highScoreArray));
+    }
+    // Clear form input field
+    userInitials.value = '';
 }
 
