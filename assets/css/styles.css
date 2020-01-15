@@ -354,6 +354,10 @@ body {
         width: 100%;
     }
 
+    .welcome-container {
+        max-height: 58vh;
+    }
+
     .leader-link {
         display: none;
     }
