@@ -34,6 +34,8 @@ let questionDiv = document.querySelector(".questions-container");
 let formDiv = document.querySelector(".form-container");
 let highScoreModal = document.querySelector(".modal-container");
 let leaderboard = document.querySelector(".user-scores");
+let leaderLink = document.querySelector(".leaderText");
+leaderLink.addEventListener("click", showLeader)
 
 let qTitle = document.getElementById("question-title");
 let qChoices = document.getElementById("question-choices");

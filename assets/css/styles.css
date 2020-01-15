@@ -26,12 +26,12 @@ body {
 
 .nav-item {
     margin: 10px 20px;
+    /* color: #fff; */
 }
 
 .title-block {
     background: #000;
     height: 100%;
-    /* width: 30%; */
     margin-top: -20px;
     text-align: center;
     border-radius: 3rem;
@@ -46,7 +46,10 @@ body {
 
 .leader-link {
     text-decoration: none;
-    color: #000;
+    /* color: #000; */
+    color: #fff;
+    letter-spacing: 0.05rem;
+    cursor: pointer;   
 }
 
 .main {
@@ -92,6 +95,7 @@ body {
 #start:hover {
     background: rgba(81, 211, 243, 0.699);
     color: #fff;
+    cursor: pointer;
 }
 
 .questions-container {
@@ -123,6 +127,9 @@ body {
     background-color:rgba(87, 192, 241, 0.199);
     border-radius: 2px solid rgba(87, 192, 241, 0.89);
     box-shadow: 2px 2px 5px #888888;
+    color: #fff;
+    font-size: 1rem;
+    /* font-weight: 600; */
 }
 
 .choice-lbl {
@@ -173,6 +180,7 @@ body {
 #userSubmit:hover {
   background: rgba(81, 211, 243, 0.699);
   color: #fff;
+  cursor: pointer;
 }
 
 /* -------- MODAL STYLES -------- */

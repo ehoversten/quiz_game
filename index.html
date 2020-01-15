@@ -1,96 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="./assets/css/styles.css" type="text/css" >
-    <title>JS Quiz Game</title>
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <title>JavaScript Quiz Game</title>
 </head>
+
 <body>
-    <section>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Quiz Show</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">High Score: <span id="score">X</span> : by <span id="username">X</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <div id="timer">
-                            <p>Time Left: <span id="time">X</span></p>
-                        </div>
-                    </li>
-                </ul>
+    <div class="wrapper">
+
+        <!-- NAVIGATION / NAVBAR  -->
+        <section class="navigation container">
+            <div class="nav-item leader-link">
+                <h1 class="leaderText">Highscores</h1>
             </div>
-        </nav>
-    </section>
-
-    <main>
-        <div class="container">
-            <button id="start" class="btn btn-success">Start Quiz</button>
-            <div id="question">
-                <h1 id="ask"></h1>
-                <ul id="choices">
-
-                </ul>
+            <div class="nav-item title-block">
+                <h1 id="navTitle">Quiz Game</h1>
             </div>
-        </div>
+            <div class="nav-item">
+                <h2>Time: <span id="timer">- -</span></h2>
+            </div>
+        </section>
 
-        <div id="user-form" class="container hide">
-            <div id="form-container">
-                <h1>Your Score: <span id="userScore"></span></h1>
+        <section class="main">
+
+            <!-- WELCOME GAME CONTAINER  -->
+            <div class="welcome-container">
+                <h1 class="instruction-text">Welcome to my small Quiz Game built using HTML, CSS and vanilla JavaScript.
+                </h1>
+
+                <p>You will be presented with a series of questions and multiple choice answers to select from. Answer
+                    the questions as best you can. Your score will be calculated at the end of the game or when the
+                    timer runs out. When the game ends you can add your name and score to the leader board. This is a
+                    timed test, can you beat the high score?</p>
+
                 <br>
 
-                <form class="form-inline">
-                    <div class="form-group mb-2">
-                        <label for="userInitials" class="sr-only">Enter Users Initals</label>
-                        <input type="text" class="form-control" id="userInitials" aria-describedby="userHelp">
-                    </div>
-                    <button type="submit" id="userSubmit" class="btn btn-primary mb-2 ml-3">Submit</button>
+                <h4>Click on the 'Play Game' button to start</h4>
+
+                <div class="start-button">
+                    <button id="start">
+                        <h2>Play Game</h2>
+                    </button>
+                </div>
+            </div>
+
+            <!-- QUESTIONS CONTAINER  -->
+            <div class="questions-container">
+                <h1 id="question-title"><span id="Q">Q:</span> Temp Question</h1>
+                <ul id="question-choices">
+                    <!-- <li id="A" class="ans-choice"><span id="choice-A" class="choice-lbl">A.</span> Choice 1</li>
+                    <li id="B" class="ans-choice"><span id="choice-B" class="choice-lbl">B.</span> Choice 2</li>
+                    <li id="C" class="ans-choice"><span id="choice-C" class="choice-lbl">C.</span> Choice 3</li>
+                    <li id="D" class="ans-choice"><span id="choice-D" class="choice-lbl">D.</span> Choice 3</li> -->
+                </ul>
+            </div>
+
+            <!-- USER SCORE AND FORM CONTAINER -->
+            <div class="form-container">
+                <h1>Your Score: <span id="user-score">0</span></h1>
+                <form>
+                    <label class="label" for="username">Enter Name:</label>
+                    <input id="username" type="text">
+                    <button id="userSubmit" type="submit">
+                        <h2>Submit</h2>
+                    </button>
                 </form>
-                <small id="userHelp" class="form-text text-muted">Enter your Initials to be added to the leaderboard!</small>
+            </div>
+
+            <!-- END OF MAIN SECTION      -->
+        </section>
+
+        <!-- HIGH SCORE MODAL  -->
+        <div class="modal-container hide">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="close">
+                        &times;
+                    </div>
+                    <h1 class="modal-header-title"><span class="accent">Leader</span> Board</h1>
+                </div>
+                <div class="modal-body">
+                    <ul class="user-scores">
+                        <!-- <li class="score-item">User #1 - <span class="scores">0</span></li>
+                        <li class="score-item">User #2 - <span class="scores">0</span></li>
+                        <li class="score-item">User #3 - <span class="scores">0</span></li>
+                        <li class="score-item">User #4 - <span class="scores">0</span></li>
+                        <li class="score-item">User #5 - <span class="scores">0</span></li> -->
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <h2 class="modal-footer-msg">Can you beat the high score?</h2>
+                    <div class="highscore-btns">
+                        <button class="modal-btn exit">
+                            <h2>Close</h2>
+                        </button>
+                        <button class="modal-btn clear">
+                            <h2>Clear Scores</h2>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
-        <div id="score_board_btn">
-            <button id="playAgain" class="btn btn-success">Play Again</button>
-            <button id="showLeader" class="btn btn-warning">Show Leader Board</button>
-        </div>
 
-        <div id="scoreboard" class="container hide">
-            <h1>Leader Board:</h1>
-            <hr>
-            <ul id="highscores">
+        <!-- FOOTER SECTION -->
+        <section class="footer">
+            <div class="footer-container">
+                <h3>&copy;2020</h3>
+            </div>
+        </section>
 
-            </ul>
-            <!-- <button id="playAgain" class="btn btn-success playAgain">Play Again</button>
-            <button id="empty_scores"class="btn btn-danger">Clear Scores</button> -->
-        </div>
-    </main>
+        <!-- END OF WRAPPER DIV -->
+    </div>
 
-    <!-- <footer>
-        <p>Footer</p>
-    </footer> -->
-
-    <!-- BOOTSTRAP  -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
-
-    <!-- OUR JS FILES -->
     <script src="./assets/js/questions.js"></script>
-    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/logic.js"></script>
 </body>
+
 </html>
