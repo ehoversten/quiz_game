@@ -252,8 +252,6 @@ function next(event) {
     check();
 }
 
-
-
 // ---------------------------------------------------- //
 //
 // End Game Function: Updates gameEnd variable, clears the timer interval, displays end game text 
@@ -282,7 +280,6 @@ function gameOver() {
     username.value = '';
 }
 
-
 // ---------------------------------------------------- //
 //
 // Save User/Score Function: 
@@ -308,6 +305,10 @@ function saveUser() {
                 score: gameScore
             }
         );
+
+        // Sort data from highest to lowest before storing in localStorage
+        sortScores(parsedTempArray);
+
         // Save updated JavaScript OBJECT to local storage by turning it into a JSON OBJECT
         localStorage.setItem('userScores', JSON.stringify(parsedTempArray));
     } else {  
@@ -360,6 +361,20 @@ function showLeader() {
 
 // ---------------------------------------------------- //
 //
+// Sort Function: Function will sort the Leader Board
+//     into high to low scores
+//
+// ---------------------------------------------------- //
+function sortScores(scoreObj) {
+    // Sort through the Object and return scores highest to lowest
+    scoreObj.sort( function(a, b) {
+        // Sort by the score values in the array of objects
+        return b.score - a.score;
+    });
+}
+
+// ---------------------------------------------------- //
+//
 // Clear Leader Board Function: Function will clear userScore OBJECT
 //     from local storage
 //
@@ -396,3 +411,5 @@ function outsideModal(event) {
         welcomeDiv.classList.remove("hide");
     }
 } 
+
+
