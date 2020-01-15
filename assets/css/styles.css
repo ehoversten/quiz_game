@@ -66,10 +66,14 @@ body {
     margin: 20px 20px;
 }
 
+.instruction-text {
+    margin-bottom: 20px;
+}
+
 .welcome-container > p {
     margin: 5px 0;
     line-height: 1.6rem;
-
+    font-size: 1rem;
 }
 
 #start {
@@ -96,6 +100,10 @@ body {
     border-radius: 1rem;
 }
 
+#question-title {
+    margin-bottom: 30px;;
+}
+
 .questions-container > ul {
     list-style: none;
     padding-left: 0;
@@ -120,38 +128,51 @@ body {
 }
 
 .form-container {
-  /* height: 30vh; */
+  height: 30vh;
   width: 70%;
   background: rgba(87, 192, 241, 0.39);
   text-align: center;
   padding: 20px 20px;
   border-radius: 1rem;
   margin: 20px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
-.form-container > input {
-    height: 5rem;
+#user-score {
+    font-size: 3rem;
+    color:  rgb(236, 144, 39);
+
+}
+
+.label {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+#username {
+    height: 2rem;
     width: 25%;
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
-
 }
 
-#submit {
-  font-size: 0.7rem;
-  font-family: Arial, Helvetica, sans-serif;
-  padding: 1rem 2rem;
-  margin: 15px 10px;
+#userSubmit {
+  padding: 1rem 1rem;
+  margin: 15px 20px;
   background: rgb(236, 144, 39);
-  border: 0.3em solid rgb(81, 211, 243);
-  border-radius: 3rem;
+  border: 0.2em solid rgb(81, 211, 243);
+  border-radius: 2rem;
 }
 
-#submit:hover {
+#userSubmit:hover {
   background: rgba(81, 211, 243, 0.699);
   color: #fff;
 }
+
+/* -------- MODAL STYLES -------- */
 
 .modal-container {
     height: 100%;
@@ -163,7 +184,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
 .modal-content {
@@ -178,7 +198,6 @@ body {
     border: 3px solid #000;
     border-radius: 2rem;
     overflow: hidden;
-
 }
 
 .modal-header, .modal-footer {
@@ -217,11 +236,13 @@ body {
 
 .user-scores > :first-child {
     font-size: 2.8rem;
-    color: goldenrod;
+    font-weight: 600;
+    color: rgb(236, 144, 39);
 }
 
 .user-scores > :last-child {
     margin-bottom: 1rem;
+
 }
 
 .score-item {
@@ -231,18 +252,34 @@ body {
 
 .modal-footer {
     width: 100%;
-    height: 60px;
+    /* height: 60px; */
 }
 
 .modal-footer-msg {
     margin-top: 0.8rem;
 }
 
+.modal-btn {
+    font-size: 0.7rem;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 1rem 2rem;
+    margin: 15px 10px;
+    background: rgb(236, 144, 39);
+    border: 0.3em solid rgb(81, 211, 243);
+    border-radius: 3rem;
+}
+
+.modal-btn:hover {
+  background: rgba(81, 211, 243, 0.699);
+  color: #fff;
+  border: 0.3em solid rgb(236, 144, 39);
+}
+
 .footer {
     position: absolute;
     bottom: 0;
     width: 100%;
-
+    z-index: -1;
 
     height: 60px;
     background-color: rgb(87, 192, 241);

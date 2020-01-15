@@ -29,13 +29,13 @@
 
             <!-- WELCOME GAME CONTAINER  -->
             <div class="welcome-container">
-                <p class="instruction-text">Welcome to my small Quiz Game built using HTML, CSS and vanilla JavaScript.</p>
+                <h1 class="instruction-text">Welcome to my small Quiz Game built using HTML, CSS and vanilla JavaScript.</h1>
 
                 <p>You will be presented with a series of questions and multiple choice answers to select from. Answer the questions as best you can. Your score will be calculated at the end of the game or when the timer runs out. When the game ends you can add your name and score to the leader board. This is a timed test, can you beat the high score?</p>
 
                 <br>
-                
-                <p>Click on the 'Play Game' button to start</p>
+
+                <h4>Click on the 'Play Game' button to start</h4>
     
                 <div class="start-button">
                     <button id="start"><h2>Play Game</h2></button>
@@ -57,9 +57,9 @@
             <div class="form-container">
                 <h1>Your Score: <span id="user-score">0</span></h1>
                 <form>
-                    <label for="username">Enter Name:</label>
+                    <label class="label" for="username">Enter Name:</label>
                     <input id="username" type="text">
-                    <button id="userSubmit" type="submit">Submit</button>
+                    <button id="userSubmit" type="submit"><h2>Submit</h2></button>
                 </form>
             </div>
 
@@ -86,6 +86,10 @@
                 </div>
                 <div class="modal-footer">
                     <h2 class="modal-footer-msg">Can you beat the high score?</h2>
+                    <div class="highscore-btns">
+                        <button class="modal-btn exit"><h2>Close</h2></button>
+                        <button class="modal-btn clear"><h2>Clear Scores</h2></button>
+                    </div>
                 </div>
             </div>
         </div>

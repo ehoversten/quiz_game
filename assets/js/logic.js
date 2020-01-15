@@ -21,8 +21,6 @@ let timerInterval;
 // Create a GLOBAL variable to hold our users answers
 let userAnswers = [];
 
-let highScoreArray = [];
-
 // Grab HTML elements for later DOM manipulation
 let time = document.getElementById("timer");
 let score = document.getElementById("user-score");
@@ -46,6 +44,14 @@ let username = document.getElementById("username");
 // Capture Submit Event
 let userSubmit = document.getElementById("userSubmit");
 userSubmit.addEventListener("click", saveUser);
+
+// Modal Logic
+let closeModal = document.querySelector(".close")
+closeModal.addEventListener("click", clearModal);
+let exit = document.querySelector(".exit");
+exit.addEventListener("click", clearModal);
+let clearScores = document.querySelector(".clear");
+clearScores.addEventListener("click", clearLeaderBoard);
 
 
 // ---------------------------------------------------- //
@@ -150,7 +156,6 @@ function newGame() {
 //
 // ---------------------------------------------------- //
 function timer() {
-
      // Create a new timer
     timerInterval = setInterval(function() {
         // decrement timer count
@@ -189,7 +194,6 @@ function check() {
 //
 // ---------------------------------------------------- //
 function loadQuestion() {
-    debugger;
     // Clear question title
     qTitle.textContent = '';
     qChoices.textContent = '';
@@ -226,7 +230,6 @@ function loadQuestion() {
 //
 // ---------------------------------------------------- //
 function next(event) {
-    debugger;
     // Uncomment the lines below and inspect the console output if your struggling with events
     // console.log(event);
     // console.log(event.target);
@@ -253,8 +256,6 @@ function next(event) {
 //
 // ---------------------------------------------------- //
 function gameOver() {
-    console.log("Game OVER!!");
-    debugger;
     // Set gameStop variable to TRUE
     gameStop = true;
 
@@ -295,7 +296,8 @@ function saveUser() {
     // TEST Do we have a JSON object called 'userScores' stored in localStorage?
     let parsedTempArray = JSON.parse(tempArray);
 
-    if (parsedTempArray !== undefined) {
+    // if (parsedTempArray !== undefined) {
+    if (parsedTempArray !== null) {
         // Add current game score to high score array
         parsedTempArray.push(
             {
@@ -306,7 +308,7 @@ function saveUser() {
         // Save updated JavaScript OBJECT to local storage by turning it into a JSON OBJECT
         localStorage.setItem('userScores', JSON.stringify(parsedTempArray));
     } else {
-        highScoreArray = [];
+        let highScoreArray = [];
         // Add current game score to high score array
         highScoreArray.push(
             {
@@ -317,7 +319,9 @@ function saveUser() {
         localStorage.setItem('userScores', JSON.stringify(highScoreArray));
     }
     // Clear form input field
-    userInitials.value = '';
+    username.value = '';
+    // Display the Leader Board
+    showLeader();
 }
 
 // ---------------------------------------------------- //
@@ -327,7 +331,6 @@ function saveUser() {
 //
 // ---------------------------------------------------- //
 function showLeader() {
-    debugger;
     // Hide All Container Divs
     formDiv.classList.add("hide");
     questionDiv.classList.add("hide");
@@ -349,4 +352,34 @@ function showLeader() {
         newScore.classList.add("score-item");
         leaderboard.appendChild(newScore);
     }
+}
+
+// ---------------------------------------------------- //
+//
+// Clear Leader Board Function: Function will clear userScore OBJECT
+//     from local storage
+//
+// ---------------------------------------------------- //
+function clearLeaderBoard() {
+    // Clear what is in localStorage
+    localStorage.removeItem("userScores");
+
+    // TEST to make sure it cleared
+    console.log("Scores Cleared");
+    console.log(localStorage);
+    // Clear the <ul> DOM element
+    leaderboard.innerHTML = "";
+}
+
+// ---------------------------------------------------- //
+//
+// Clear Modal Function: Function will clear Leader Board
+//      Modal overlay and return to welcome screen
+//
+// ---------------------------------------------------- //
+function clearModal() {
+    // hide modal
+    highScoreModal.classList.add("hide");
+    // Un-hide Start Message
+    welcomeDiv.classList.remove("hide");
 }
