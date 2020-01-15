@@ -60,6 +60,8 @@ body {
     min-height: 70vh;
 }
 
+/* -------- WELCOME STYLES -------- */
+
 .welcome-container {
     width: 70%;
     background: rgba(87, 192, 241, 0.39);
@@ -97,6 +99,8 @@ body {
     color: #fff;
     cursor: pointer;
 }
+
+/* -------- QUESTIONS STYLES -------- */
 
 .questions-container {
     /* height: 30vh; */
@@ -137,6 +141,8 @@ body {
     margin-right: 5px;
     font-size: 1.2rem;
 }
+
+/* -------- FORM STYLES -------- */
 
 .form-container {
   height: 30vh;
@@ -283,7 +289,6 @@ body {
 
     animation-name: modalclose;
     animation-duration: 1s;
-
 }
 
 .modal-btn:hover {
@@ -291,6 +296,8 @@ body {
   color: #fff;
   border: 0.3em solid rgb(236, 144, 39);
 }
+
+/* -------- FOOTER STYLES -------- */
 
 .footer {
     position: absolute;
@@ -313,6 +320,7 @@ body {
   display: none;
 }
 
+/* -------- ANIMATION -------- */
 
 @keyframes modalopen {
     from { opacity: 0 }
@@ -324,6 +332,8 @@ body {
     to { opacity: 0 }
 }
 
+
+/* -------- MEDIA QUERIES -------- */
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 414px) {
@@ -353,6 +363,12 @@ body {
         margin-bottom: 10px;
     }
 
+    .questions-container > ul > li:hover {
+        background-color: rgba(87, 192, 241, 0.61);
+        padding: 10px 10px;
+        margin: 10px 0px;
+        border-radius: 2px solid rgba(87, 192, 241, 0.89);
+    }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
