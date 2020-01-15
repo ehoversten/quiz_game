@@ -354,9 +354,9 @@ body {
         width: 100%;
     }
 
-    .welcome-container {
+    /* .welcome-container {
         max-height: 58vh;
-    }
+    } */
 
     .leader-link {
         display: none;
