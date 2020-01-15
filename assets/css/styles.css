@@ -31,10 +31,11 @@ body {
 .title-block {
     background: #000;
     height: 100%;
-    width: 30%;
-    margin-top: -15px;
+    /* width: 30%; */
+    margin-top: -20px;
     text-align: center;
     border-radius: 3rem;
+    padding: 5px 20px;
 }
 
 #navTitle {
@@ -53,7 +54,6 @@ body {
     /* flex-direction: column; */
     justify-content: center;
     align-items: center;
-
     min-height: 70vh;
 }
 
@@ -64,13 +64,16 @@ body {
     padding: 20px 20px;
     border-radius: 1rem;
     margin: 20px 20px;
+
+    animation-name: modalopen;
+    animation-duration: 2s;
 }
 
 .instruction-text {
     margin-bottom: 20px;
 }
 
-.welcome-container > p {
+.welcome-container > p, h4 {
     margin: 5px 0;
     line-height: 1.6rem;
     font-size: 1rem;
@@ -119,6 +122,7 @@ body {
 .questions-container > ul > li:hover {
     background-color:rgba(87, 192, 241, 0.199);
     border-radius: 2px solid rgba(87, 192, 241, 0.89);
+    box-shadow: 2px 2px 5px #888888;
 }
 
 .choice-lbl {
@@ -143,7 +147,6 @@ body {
 #user-score {
     font-size: 3rem;
     color:  rgb(236, 144, 39);
-
 }
 
 .label {
@@ -184,6 +187,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    animation-name: modalopen;
+    animation-duration: 1.5s;
 }
 
 .modal-content {
@@ -242,7 +248,6 @@ body {
 
 .user-scores > :last-child {
     margin-bottom: 1rem;
-
 }
 
 .score-item {
@@ -267,6 +272,10 @@ body {
     background: rgb(236, 144, 39);
     border: 0.3em solid rgb(81, 211, 243);
     border-radius: 3rem;
+
+    animation-name: modalclose;
+    animation-duration: 1s;
+
 }
 
 .modal-btn:hover {
@@ -294,4 +303,66 @@ body {
 
 .hide {
   display: none;
+}
+
+
+@keyframes modalopen {
+    from { opacity: 0 }
+    to { opacity: 1 }
+}
+
+@keyframes modalclose {
+    from { opacity: 1 }
+    to { opacity: 0 }
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 414px) {
+  .container {
+    width: 100%;
+    background-color: rgb(87, 192, 241);
+    padding-top: 30px;
+    padding-bottom: 4rem;
+    display: flex;
+    }
+
+    .welcome-container,
+    .questions-container,
+    .form-container,
+    .modal-content,
+    .title-block,
+    .nav-item {
+        width: 100%;
+    }
+
+    .leader-link {
+        display: none;
+    }
+
+    .nav-item {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  /* ...; */
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  /* ...; */
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  /* ...; */
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  /* ...; */
 }

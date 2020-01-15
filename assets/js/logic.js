@@ -48,11 +48,14 @@ userSubmit.addEventListener("click", saveUser);
 // Modal Logic
 let closeModal = document.querySelector(".close")
 closeModal.addEventListener("click", clearModal);
+// Close Modal when clicked outside of modal-container
+window.addEventListener("click", outsideModal);
+
 let exit = document.querySelector(".exit");
 exit.addEventListener("click", clearModal);
+
 let clearScores = document.querySelector(".clear");
 clearScores.addEventListener("click", clearLeaderBoard);
-
 
 // ---------------------------------------------------- //
 //
@@ -284,7 +287,6 @@ function gameOver() {
 //
 // ---------------------------------------------------- //
 function saveUser() {
-    debugger;
     // Prevent the form from reloading the page
     event.preventDefault();
     // Check that the input is NOT empty
@@ -383,3 +385,12 @@ function clearModal() {
     // Un-hide Start Message
     welcomeDiv.classList.remove("hide");
 }
+
+function outsideModal(event) {
+    if (event.target == highScoreModal) {
+        // hide modal
+        highScoreModal.classList.add("hide");
+        // Un-hide Start Message
+        welcomeDiv.classList.remove("hide");
+    }
+} 
