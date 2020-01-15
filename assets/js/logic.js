@@ -295,8 +295,7 @@ function saveUser() {
     let tempArray = localStorage.getItem("userScores");
     // TEST Do we have a JSON object called 'userScores' stored in localStorage?
     let parsedTempArray = JSON.parse(tempArray);
-
-    // if (parsedTempArray !== undefined) {
+    // IF we DO have stored data in localStorage run the following
     if (parsedTempArray !== null) {
         // Add current game score to high score array
         parsedTempArray.push(
@@ -307,7 +306,8 @@ function saveUser() {
         );
         // Save updated JavaScript OBJECT to local storage by turning it into a JSON OBJECT
         localStorage.setItem('userScores', JSON.stringify(parsedTempArray));
-    } else {
+    } else {  
+        // ELSE - the userScores OBJECT was cleared and we need to create a new ARRAY to put our JS Object into, convert it and store it.
         let highScoreArray = [];
         // Add current game score to high score array
         highScoreArray.push(
