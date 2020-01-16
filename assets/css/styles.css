@@ -336,13 +336,13 @@ body {
 /* -------- MEDIA QUERIES -------- */
 
 /* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 414px) {
+@media only screen and (max-width: 600px) {
   .container {
-    width: 100%;
-    background-color: rgb(87, 192, 241);
-    padding-top: 30px;
-    padding-bottom: 4rem;
-    display: flex;
+        width: 100%;
+        background-color: rgb(87, 192, 241);
+        padding-top: 30px;
+        padding-bottom: 4rem;
+        display: flex;
     }
 
     .welcome-container,
@@ -353,10 +353,6 @@ body {
     .nav-item {
         width: 100%;
     }
-
-    /* .welcome-container {
-        max-height: 58vh;
-    } */
 
     .leader-link {
         display: none;
@@ -373,11 +369,47 @@ body {
         margin: 10px 0px;
         border-radius: 2px solid rgba(87, 192, 241, 0.89);
     }
+
+    .footer {
+        display: none;
+    }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-  /* ...; */
+@media only screen and (min-width: 768px) {
+    .container {
+        width: 100%;
+        background-color: rgb(87, 192, 241);
+        padding-top: 30px;
+        padding-bottom: 4rem;
+        display: flex;
+    }
+
+    .welcome-container,
+    .questions-container,
+    .form-container,
+    .modal-content,
+    .title-block,
+    .nav-item {
+        width: 100%;
+    }
+
+    .leader-link {
+        display: none;
+    }
+
+    .nav-item {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .questions-container > ul > li:hover {
+        background-color: rgba(87, 192, 241, 0.61);
+        padding: 10px 10px;
+        margin: 10px 0px;
+        border-radius: 2px solid rgba(87, 192, 241, 0.89);
+    }
+
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -385,12 +417,3 @@ body {
   /* ...; */
 }
 
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
-  /* ...; */
-}
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
-  /* ...; */
-}
