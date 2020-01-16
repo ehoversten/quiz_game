@@ -376,7 +376,7 @@ body {
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 768px) {
+@media only screen and (max-width: 768px) {
     .container {
         width: 100%;
         background-color: rgb(87, 192, 241);
