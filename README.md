@@ -12,7 +12,7 @@ at game end or by clicking on the 'Highscores' link in the navbar. Use will have
 - Visit the project page:
   https://ehoversten.github.io/quiz_game/
 
-
+&nbsp;
 ## Technologies:
 
 * HTML 5
@@ -23,9 +23,15 @@ at game end or by clicking on the 'Highscores' link in the navbar. Use will have
 
 ## Usage:
 
-* Screeen Shots Go Here
+![Game Start Image](./assets/img/game_start.png)
 
-## Maintainers
+![Game Start Image](./assets/img/question.png)
+
+![Game Start Image](./assets/img/user_form.png)
+
+![Game Start Image](./assets/img/leaderboard.png)
+
+## Maintainer
 
 - Erik Hoversten
 
