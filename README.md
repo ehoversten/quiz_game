@@ -23,13 +23,21 @@ at game end or by clicking on the 'Highscores' link in the navbar. Use will have
 
 ## Usage:
 
-![Game Start Image](./assets/img/game_start.png)
 
-![Game Start Image](./assets/img/question.png)
+<img src="./assets/img/game_start.png"
+     alt="Game Start Image"
+     style="border: 2px solid black" />
 
-![Game Start Image](./assets/img/user_form.png)
+<img src="./assets/img/question.png"
+     alt="Question Image"
+     style="border: 2px solid black" />
 
-![Game Start Image](./assets/img/leaderboard.png)
+<img src="./assets/img/user_form.png"
+     alt="User Form Image"
+     style="border: 2px solid black" />
+
+![Game Leaderboard Image](./assets/img/leaderboard.png)
+
 
 ## Maintainer
 
