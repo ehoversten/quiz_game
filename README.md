@@ -20,29 +20,59 @@ at game end or by clicking on the 'Highscores' link in the navbar. Use will have
 * CSS Animations
 * JavaScript
 
-
+&nbsp;  
 ## Usage:
 
+![Game Start Image](./assets/img/game_start.png)
 
-<img src="./assets/img/game_start.png"
-     alt="Game Start Image"
-     style="border: 2px solid black" />
+![Question Image](./assets/img/question.png)
 
-<img src="./assets/img/question.png"
-     alt="Question Image"
-     style="border: 2px solid black" />
-
-<img src="./assets/img/user_form.png"
-     alt="User Form Image"
-     style="border: 2px solid black" />
+![User Form Image](./assets/img/user_form.png)
 
 ![Game Leaderboard Image](./assets/img/leaderboard.png)
 
 
+## Instructions
+
+To try out the quiz game simple follow the link: https://ehoversten.github.io/quiz_game/
+
+Want to upload your own question set? 
+
+* Create a new question file (in the project directory "./assets/js")
+```javascript
+touch question_set.js
+```
+
+* Create your own JavaScript Question Object Array by follow the object structure below.
+
+Example structure of Question Set Object Array 
+```javascript
+var questions = [
+    {
+        title: "Question #1 Title",
+        choices: ["choice_1", "choice_2", "choice_3", "choice_4"],
+        answer: "choice_1"
+    },
+    {
+        title: "Question #2 Title",
+        choices: ["choice_1", "choice_2", "choice_3", "choice_4"],
+        answer: "choice_3"
+    },
+    ///etc.
+];
+```
+
+* Update the file path to your new question_set file in the HTML code (index.html)
+
+```html
+<script src="./assets/js/<FILE_NAME>.js"></script>
+```
+
+&nbsp;   
 ## Maintainer
 
 - Erik Hoversten
 
 ## License:
 
-* MIT
+Licensed under the MIT license.
