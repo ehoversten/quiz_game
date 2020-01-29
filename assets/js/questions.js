@@ -1,14 +1,19 @@
 // Question Array 
 var questions = [
   {
-    title: "Some where over the _____",
-    choices: ["rainbow", "fence", "bush", "next hill"],
-    answer: "rainbow"
+    title: "JavaScript is the same as Java.",
+    choices: ["true", "false"],
+    answer: "false"
   },
   {
-    title: "Rick and ______",
-    choices: ["Squirl", "Morty", "Bobby", "Rick"],
-    answer: "Morty"
+    title: "What is the correct way to write a JavaScript array?",
+    choices: [
+      "var colors = 'red', 'green', 'blue'",
+      "var colors = ['red', 'green', 'blue']",
+      "var colors = 1:'red', 2:'green', 3:'blue'",
+      "var colors = { 'red', 'green', blue' }"
+    ],
+    answer: "var colors = ['red', 'green', 'blue']"
   },
   {
     title: "What is the correct JavaScript syntax to write 'Hello World'?",
@@ -42,3 +47,4 @@ var questions = [
     answer: "false"
   }
 ];
+
