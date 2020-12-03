@@ -285,7 +285,7 @@ function gameOver() {
 // Save User/Score Function: 
 //
 // ---------------------------------------------------- //
-function saveUser() {
+function saveUser(event) {
     // Prevent the form from reloading the page
     event.preventDefault();
     // Check that the input is NOT empty
